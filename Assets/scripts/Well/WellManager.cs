@@ -29,7 +29,7 @@ public class WellManager : MonoBehaviour {
 			timer = WellVars.timer;
 		} else {
 			if (Input.GetKeyDown(KeyCode.Space)) {
-				GlobalVars.wellsCompleted[WellVars.level] = true;
+				GlobalVars.wellsCompleted[WellVars.level].setCompleted(true);
 				Application.LoadLevel("Level 1");
 			}
 		}

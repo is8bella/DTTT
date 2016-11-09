@@ -11,6 +11,8 @@ public class Well : MonoBehaviour {
 	private float timer;
 	private Color faded;
 
+	public GameObject popup;
+
 	// Use this for initialization
 	void Start () {
 		activated = false;
@@ -22,6 +24,7 @@ public class Well : MonoBehaviour {
 	}
 
 	void Update () {
+		completed = GlobalVars.wellsCompleted[level].isCompleted();
 		if (!completed) {
 			if (activated) {
 				timer += Time.deltaTime;
@@ -38,11 +41,7 @@ public class Well : MonoBehaviour {
 					WellVars.level = level;
 					Application.LoadLevel ("WellGame");
 				}
-			}
-
-			if (GlobalVars.wellsCompleted[level]) {
-				completed = true;
-			}
+				}
 		} else {
 			r.color = Color.white;
 		}
@@ -55,6 +54,7 @@ public class Well : MonoBehaviour {
 			GlobalVars.playerY = col.gameObject.transform.position.y;
 			activated = true;
 			timer = 0f;
+			popup.GetComponent<PopUp>().appear();
 		}
 	}
 
@@ -63,6 +63,7 @@ public class Well : MonoBehaviour {
 		if (!completed && col.gameObject.tag == "Player") {
 			activated = false;
 			r.color = faded;
+			popup.GetComponent<PopUp>().disappear();
 		}
 	}
 

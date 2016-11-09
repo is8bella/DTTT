@@ -67,7 +67,7 @@ class DragTransform : MonoBehaviour
 			Vector3 rayPoint = ray.GetPoint(distance);
 			float xPos = Mathf.Round(rayPoint.x / posRoundFactor) * posRoundFactor;
 			float yPos = Mathf.Round(rayPoint.y / posRoundFactor) * posRoundFactor;
-			rayPoint = new Vector3(xPos, yPos, transform.position.z);
+			rayPoint = new Vector3(xPos, yPos, 8);
 			transform.position = rayPoint;
 			if (Input.GetMouseButtonUp(0)) {
 				if (availableSpot) {
