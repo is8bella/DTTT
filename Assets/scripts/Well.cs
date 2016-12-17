@@ -54,8 +54,8 @@ public class Well : MonoBehaviour {
 			GlobalVars.playerY = col.gameObject.transform.position.y;
 			activated = true;
 			timer = 0f;
-			popup.GetComponent<PopUp>().appear();
 		}
+		popup.GetComponent<PopUp>().appear();
 	}
 
 	void OnTriggerExit2D(Collider2D col)
@@ -63,8 +63,8 @@ public class Well : MonoBehaviour {
 		if (!completed && col.gameObject.tag == "Player") {
 			activated = false;
 			r.color = faded;
-			popup.GetComponent<PopUp>().disappear();
 		}
+		popup.GetComponent<PopUp>().disappear();
 	}
 
 }
