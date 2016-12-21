@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PipeManager : MonoBehaviour {
 
-	public static Dictionary<Location, Pipe> pipes = new Dictionary<Location, Pipe>(new LocationComparer());
+	private static Dictionary<Location, Pipe> pipes = new Dictionary<Location, Pipe>(new LocationComparer());
 
 	private float posRoundFactor = 0.7f;
 	public GameObject wellPrefab;
@@ -26,7 +26,9 @@ public class PipeManager : MonoBehaviour {
 		Location furthestPos = new Location (0, 0);
 		while (!WellVars.finished) {
 			if (furthestPos.y > 6) {
-				WellVars.finished = true;											//you win!!
+				//You win!!
+				WellVars.finished = true;
+				WellVars.waterPt = Utils.roundBy50((int) (1000 * WellVars.timer / (float) WellVars.startTime));
 				float wellx = furthestPos.x * 0.7f + WellVars.waterSourcePos.x;
 				float welly = furthestPos.y * 0.7f + WellVars.waterSourcePos.y + 0.4f;
 				Instantiate(well, new Vector3(wellx, welly, 0), Quaternion.identity);
@@ -74,7 +76,14 @@ public class PipeManager : MonoBehaviour {
 	}
 
 	public static void RemovePipe (int xPos, int yPos) {
-		pipes.Remove(new Location(xPos, yPos));
+		Location loc = new Location (xPos, yPos);
+		if (pipes.ContainsKey (loc)) {
+			pipes.Remove(loc);
+		}
+	}
+
+	public static bool HasPipe (int xPos, int yPos) {
+		return pipes.ContainsKey(new Location(xPos, yPos));
 	}
 
 }

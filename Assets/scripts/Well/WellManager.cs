@@ -16,8 +16,9 @@ public class WellManager : MonoBehaviour {
 		WellVars.finished = false;
 		WellVars.doneDigging = false;
 
-		timer = WellVars.startTimes[WellVars.level];
+		timer = WellVars.startTime;
 		WellVars.timer = timer;
+		WellVars.waterPt = 0;
 
 	}
 
@@ -29,7 +30,16 @@ public class WellManager : MonoBehaviour {
 			timer = WellVars.timer;
 		} else {
 			if (Input.GetKeyDown(KeyCode.Space)) {
-				GlobalVars.wellsCompleted[WellVars.level].setCompleted(true);
+				GlobalVars.wellStats[WellVars.level].setCompleted(true);
+
+				if (WellVars.waterPt > GlobalVars.wellStats[WellVars.level].getWaterPoints()) {
+					Debug.Log ("New High Score: " + WellVars.waterPt);
+					GlobalVars.waterPoints += WellVars.waterPt - GlobalVars.wellStats[WellVars.level].getWaterPoints();
+					GlobalVars.wellStats[WellVars.level].setWaterPoints(WellVars.waterPt);
+					Debug.Log ("New Total: " + GlobalVars.waterPoints);
+				} else {
+					Debug.Log ("Derp Score: " + WellVars.waterPt);
+				}
 				Application.LoadLevel("Level 1");
 			}
 		}
@@ -54,11 +64,9 @@ public class WellManager : MonoBehaviour {
 				// In this example, I split it into arguments based on comma
 				// deliniators, then send that array to DoStuff()
 				string[] startTimesS = line.Split (',');
-				int[] startTimes = new int[startTimesS.Length];
-				for (int i = 0; i < startTimesS.Length; i++) {
-					startTimes [i] = int.Parse (startTimesS [i]);
-				}
-				WellVars.startTimes = startTimes;
+				int startTime;
+				startTime = int.Parse(startTimesS[WellVars.level]);
+				WellVars.startTime = startTime;
 			}
 			// Done reading, close the reader and return true to broadcast success    
 			theReader.Close ();

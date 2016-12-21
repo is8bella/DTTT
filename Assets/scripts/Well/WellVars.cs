@@ -5,6 +5,7 @@ public class WellVars : MonoBehaviour {
 
 	public static float timer = 60f;
 	public static bool finished = false;
+	public static int waterPt = 0;
 
 	public static int dirtDist = 54;
 	public static bool doneDigging = false;
@@ -14,6 +15,6 @@ public class WellVars : MonoBehaviour {
 
 	public static int level = 1;
 
-	public static int[] startTimes;	//start time for each level
+	public static int startTime;	
 
 }
