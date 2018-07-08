@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Text;
 using System.IO;
@@ -8,7 +9,7 @@ public class WellManager : MonoBehaviour {
 
 	public Text timerText;
 	public float timer;
-	
+
 	// Use this for initialization
 	void Start () {
 		Load ("WellData.txt");
@@ -40,7 +41,7 @@ public class WellManager : MonoBehaviour {
 				} else {
 					Debug.Log ("Derp Score: " + WellVars.waterPt);
 				}
-				Application.LoadLevel("Level 1");
+				SceneManager.LoadScene("Level 1");
 			}
 		}
 	}
@@ -54,7 +55,7 @@ public class WellManager : MonoBehaviour {
 		// Immediately clean up the reader after this block of code is done.
 		// You generally use the "using" statement for potentially memory-intensive objects
 		// instead of relying on garbage collection.
-		// (Do not confuse this with the using directive for namespace at the 
+		// (Do not confuse this with the using directive for namespace at the
 		// beginning of a class!)
 		using (theReader) {
 			// While there's lines left in the text file, do this:
@@ -68,7 +69,7 @@ public class WellManager : MonoBehaviour {
 				startTime = int.Parse(startTimesS[WellVars.level]);
 				WellVars.startTime = startTime;
 			}
-			// Done reading, close the reader and return true to broadcast success    
+			// Done reading, close the reader and return true to broadcast success
 			theReader.Close ();
 			return true;
 		}

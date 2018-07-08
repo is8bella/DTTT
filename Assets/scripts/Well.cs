@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Well : MonoBehaviour {
@@ -28,7 +29,7 @@ public class Well : MonoBehaviour {
 		if (activated) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				WellVars.level = level;
-				Application.LoadLevel ("WellGame");
+				SceneManager.LoadScene("WellGame");
 			}
 			if (!completed) {
 				timer += Time.deltaTime;
