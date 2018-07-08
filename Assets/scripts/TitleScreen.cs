@@ -8,17 +8,10 @@ public class TitleScreen : MonoBehaviour {
 	public GameObject[] bars;
 	public GameObject pressSpaceBar;
 
-	private float timer;
-	private int index;
+	private float timer = 0f;
+	private int index = 0;
 	private Renderer pressSpaceBarRenderer;
 
-	// Use this for initialization
-	void Start () {
-		timer = 0f;
-		index = 0;
-	}
-
-	// Update is called once per frame
 	void Update () {
 		if (index < bars.Length) {
 			if (timer > index * 3f) {
