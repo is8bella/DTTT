@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveBar : MonoBehaviour {
 
-	private bool moving = false;
+	public bool moving = false;
 
 	void Update () {
 		if (moving) {
